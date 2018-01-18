@@ -24,25 +24,26 @@ board.on("ready", function() {
   
   var temperature = new five.Thermometer({
     controller: "LM35",
-    pin: "A0",
+    pin: "A5",
     freq: 2000
   });
 
-  var photoSensor = new five.Sensor({
-    pin: 'A1',
-    freq: 1000
-  });
+  // var photoSensor = new five.Sensor({
+  //   pin: 'A1',
+  //   freq: 2000
+  // });
 
   io.on('connection', function (socket) {  
     
-    temperature.on("change", function() {
-      var currTemp = {'celsius':this.C};
+    temperature.on("data", function() {
+      var currTemp = {'celsius': this.C};
       socket.emit('currTemp', currTemp);
     });
 
-    photoSensor.on('data', function() {
-      console.log(this.value);
-    });
+    // photoSensor.on('data', function() {
+    //   var currLight = {'light': this.value};
+    //   socket.emit('light', currLight);
+    // });
 
     console.log('socket.id', socket.id);
   });
