@@ -11,6 +11,7 @@ board.on("ready", function() {
   });
 
   temperature.on("change", function() {
-    console.log(this.celsius + "°C", this.fahrenheit + "°F");
+    // console.log(this.celsius + "°C", this.fahrenheit + "°F");
+    console.log(this.celsius + "°C");
   });
 });
