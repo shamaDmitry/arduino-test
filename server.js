@@ -28,11 +28,20 @@ board.on("ready", function() {
     freq: 2000
   });
 
+  var photoSensor = new five.Sensor({
+    pin: 'A1',
+    freq: 1000
+  });
+
   io.on('connection', function (socket) {  
     
     temperature.on("change", function() {
       var currTemp = {'celsius':this.C};
       socket.emit('currTemp', currTemp);
+    });
+
+    photoSensor.on('data', function() {
+      console.log(this.value);
     });
 
     console.log('socket.id', socket.id);
