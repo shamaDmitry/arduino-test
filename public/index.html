@@ -6,12 +6,13 @@
 </head>
 <body>
 	<h1>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore placeat, necessitatibus quae? Nobis tenetur odit suscipit autem debitis, fugiat hic ducimus distinctio, iusto error tempore aperiam. Quia doloremque eveniet quidem.
+		temp
 	</h1>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>	
 	<script>
-		var socket = io.connect('http://192.168.115.86:3000');
+		var socket = io.connect('http://localhost:3000');
+		
 		socket.on('currTemp', function(data) {
 			console.log(data);
 		});

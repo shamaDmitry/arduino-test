@@ -13,11 +13,11 @@ app.get('/', function(req, res) {
 });
 
 server.listen(port, function() {
-	console.log("server run");
+	console.log("server run on port " + port);
 });
 
 
-var board = new five.Board({ port: "COM3" });
+var board = new five.Board();
 
 board.on("ready", function() {
   console.log('board ready');
@@ -25,16 +25,19 @@ board.on("ready", function() {
   var temperature = new five.Thermometer({
     controller: "LM35",
     pin: "A0",
-    freq: 2000
+    freq: 1000
   });
 
-  io.on('connection', function (socket) {  
-    
-    temperature.on("change", function() {
-      var currTemp = {'celsius':this.C};
+  io.on('connection', function (socket) {     
+    temperature.on("data", function() {
+      var currTemp = {
+        "celsius": this.celsius,
+        "fahrenheit": this.fahrenheit
+      }
+
       socket.emit('currTemp', currTemp);
     });
 
-    console.log('socket.id', socket.id);
+    console.log(socket);
   });
 });
