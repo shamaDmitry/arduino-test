@@ -38,6 +38,6 @@ board.on("ready", function() {
       socket.emit('currTemp', currTemp);
     });
 
-    console.log(socket);
+    console.log('socket.id', socket.id);
   });
 });
